@@ -1,5 +1,5 @@
 const login = async (req, res) => {
-  res.semd("Fake Login/ Register/ Signup Route");
+  res.send("Fake Login/ Register/ Signup Route");
 };
 
 const dashboard = async (req, res) => {
