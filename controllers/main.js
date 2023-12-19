@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const CustomAPIError = require("../errors/custom-error");
 
 const login = async (req, res) => {
+  console.log(req.body)
   const { username, password } = req.body;
   if (!username || !password) {
     throw new CustomAPIError("Please provide your email and password", 400);
@@ -20,7 +21,7 @@ const dashboard = async (req, res) => {
     throw new CustomAPIError("No token provided", 401);
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1]; 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const luckyNumber = Math.floor(Math.random() * 100);
