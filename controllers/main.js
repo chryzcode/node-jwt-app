@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const CustomAPIError = require("../errors/custom-error");
+const {BadRequestError} = require("../errors/index");
 
 const login = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new CustomAPIError("Please provide your email and password", 400);
+    throw new BadRequestError("Please provide email and password");
   }
 
   const id = new Date().getDate();
@@ -16,10 +16,6 @@ const login = async (req, res) => {
 };
 
 const dashboard = async (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw new CustomAPIError("No token provided", 401);
-  }
   const luckyNumber = Math.floor(Math.random() * 100);
   res.status(200).json({
     msg: `Hello, ${req.user.username}`,
